@@ -1,0 +1,11 @@
+server:
+  port: 8081
+
+  
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://AS-Test:test@population.yidl0.mongodb.net/ReviewNRatings
+      
+  application:
+    name: reviewnratings-service

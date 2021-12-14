@@ -1,0 +1,9 @@
+server:
+  port: 8000
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://AS-Test:test@population.yidl0.mongodb.net/Main
+  application:
+    name: ADMIN-SERVICE
