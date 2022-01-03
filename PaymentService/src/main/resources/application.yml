@@ -1,2 +1,25 @@
 server:
   port: 8083
+  
+  
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://AS-Test:test@population.yidl0.mongodb.net/Payment
+      
+  application:
+    name: payment-service
+    
+
+  
+  
+paypal:
+ mode: sandbox
+ 
+ client:
+  id: AQKpotfUQUXpGyDwIY-_AahReABc_eAQS3SMs8Q6ESw99u5BIbbKrjx2LplVt3-G24GYquPMgJ6eHIV6
+  
+  secret: EAYyikcJDYIeU_u3L63Mc7B_Ngh_SArYkdcudqx3CUgL_5igetMbd95HDPnPjz95ykQapF9bxtMNr39q
+  
+ 
+

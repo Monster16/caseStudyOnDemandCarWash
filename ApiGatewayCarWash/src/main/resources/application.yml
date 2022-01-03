@@ -25,7 +25,7 @@ spring:
         - Path=/order/**
         
       - id: WASHER-SERVICE
-        uri: http://localhost:8003/
+        uri: http://WASHER-SERVICE/
         predicates:
         - Path=/washer/**
         

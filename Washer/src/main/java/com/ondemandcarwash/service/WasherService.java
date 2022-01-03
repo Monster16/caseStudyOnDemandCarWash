@@ -2,6 +2,7 @@ package com.ondemandcarwash.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -9,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+
 import com.ondemandcarwash.model.Washer;
 import com.ondemandcarwash.repository.WasherRepository;
 
@@ -19,22 +22,37 @@ public class WasherService implements UserDetailsService{
 	@Autowired
 	private WasherRepository washerRepository;
     
-	/*
-	 * //for creating/adding washer[ public Washer addWasher(Washer washer) { return
-	 * washerRepository.save(washer); }
-	 */
-     
+	//For CREATING/ADDING  Customer 
+		public Washer addwasher(Washer washer) {
+			return washerRepository.save(washer);
+			
+		}
 	
+		
+		
 	//
 	public List<Washer> getWashers() {
-		// TODO Auto-generated method stub
 		List<Washer> washer= washerRepository.findAll();
 		System.out.println("Getting Washer from DB" + washer);
 		return washer;
 	}
+	
+	
+	
+	public Optional<Washer> findById(String id) {
+		return washerRepository.findById(id);
+	}
 
 
-	public void deleteById(int id) {
+	public void save(Washer washer) {
+		// TODO Auto-generated method stub
+		washerRepository.save(washer);
+		
+		
+	}
+
+
+	public void deleteById(String id) {
 		washerRepository.deleteById(id);
 		
 	}
@@ -50,4 +68,10 @@ public class WasherService implements UserDetailsService{
 		return new User(wEmail, wPassword, new ArrayList<>());
 	}
 
+
+
+	
+	
+
+	
 }

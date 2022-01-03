@@ -2,6 +2,8 @@ package com.ondemandcarwash.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,9 +31,24 @@ public class CustomerService implements UserDetailsService{
 		System.out.println("Getting Customers from DB" + customers);
 		return customers;
 	}
+	
+	
+	 //For getting  Customers by
+	
+	public Optional<Customer> findById(String id) {
+		return customerRepository.findById(id);
+		
+		
+	}
+	
+	//For updating By Id
+	public void save(Customer customer) {
+		customerRepository.save(customer);
+		
+	}
 
 	//For deleting By Id
-	public void deleteById(int id) {
+	public void deleteById(String id) {
 		customerRepository.deleteById(id);
 		
 	}
@@ -45,6 +62,9 @@ public class CustomerService implements UserDetailsService{
 		String cPassword = foundedCustomer.getcPassword();
 		return new User(cEmail, cPassword, new ArrayList<>());
 	}
+	
+	
+	
 	
 	
 }

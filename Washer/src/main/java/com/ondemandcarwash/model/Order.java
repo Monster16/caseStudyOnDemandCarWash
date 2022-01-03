@@ -2,17 +2,9 @@ package com.ondemandcarwash.model;
 
 import java.util.Date;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
+
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -20,32 +12,25 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Order {
 	
 
-	@Min(value = 1, message = "User ID Invalid")
 	private long cId;
 
-	@Valid
 	private String address;
 
 	
-	@Field
-	private String status="Placed";
+	private String status;
 
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date serviceDate;
 
 
-	@NotNull
+	
 	private String carName;
 
-	@NotNull
 	private String carModel;
 
-	@NotNull
 	private int washPackId;
-	
 	private int price;
-
 	
 	/*
 	 * Parameterized Constructor
@@ -53,9 +38,8 @@ public class Order {
 	 */
 
 	
-
-	public Order(@Min(value = 1, message = "User ID Invalid") long cId, @Valid String address, String status,
-			Date serviceDate, @NotNull String carName, @NotNull String carModel, @NotNull int washPackId,int price) {
+	public Order(long cId, String address, String status, Date serviceDate, String carName, String carModel,
+			int washPackId,int price) {
 		super();
 		this.cId = cId;
 		this.address = address;
@@ -66,7 +50,6 @@ public class Order {
 		this.washPackId = washPackId;
 		this.price = price;
 	}
-
 	
 
 	/*
@@ -82,9 +65,6 @@ public class Order {
 	}
 
 	
-
-	
-
 
 
 	public void setcId(long cId) {
@@ -154,7 +134,6 @@ public class Order {
 		this.washPackId = washPackId;
 	}
 
-
 	public int getPrice() {
 		return price;
 	}
@@ -164,6 +143,7 @@ public class Order {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
 
 	/*
 	 * No parameter Constructor or default constructor

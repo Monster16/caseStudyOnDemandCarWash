@@ -6,8 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "washers")
 public class Washer {
 	
-	@Id
-	private int wId;
+	
 	private String wName;
 	private String wEmail;
 	private String wPhone;
@@ -25,7 +24,7 @@ public class Washer {
 	//parameterised constructor
 	public Washer(int wId, String wName, String wEmail, String wPhone, String wAddress, String wPassword) {
 		super();
-		this.wId = wId;
+		
 		this.wName = wName;
 		this.wEmail = wEmail;
 		this.wPhone = wPhone;
@@ -35,12 +34,7 @@ public class Washer {
 	
 	//getters and setters
 	
-	public int getwId() {
-		return wId;
-	}
-	public void setwId(int wId) {
-		this.wId = wId;
-	}
+	
 	public String getwName() {
 		return wName;
 	}

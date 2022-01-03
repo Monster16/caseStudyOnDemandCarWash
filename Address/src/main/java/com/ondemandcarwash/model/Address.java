@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="address")
 public class Address {
 	@Id
-	private int userId;
+	private long cId;
 	private int houseNumber;
 	private String streetName;
 	private String colonyName;
@@ -17,7 +17,7 @@ public class Address {
 	
 	@Override
 	public String toString() {
-		return "Address [userId=" + userId + ", houseNumber=" + houseNumber + ", streetName=" + streetName
+		return "Address [cId=" + cId + ", houseNumber=" + houseNumber + ", streetName=" + streetName
 				+ ", colonyName=" + colonyName + ", city=" + city + ", state=" + state + ", pincode=" + pincode + "]";
 	}
 	public Address() {
@@ -25,7 +25,7 @@ public class Address {
 	}
 	public Address(int userId, int houseNumber, String streetName, String colonyName, String city, String state, int pincode) {
 		super();
-		this.userId=userId;
+		this.cId=cId;
 		this.houseNumber = houseNumber;
 		this.streetName = streetName;
 		this.colonyName = colonyName;
@@ -35,11 +35,11 @@ public class Address {
 	}
 	
 	
-	public int getUserId() {
-		return userId;
+	public long getUserId() {
+		return cId;
 	}
 	public void setUserId(int userId) {
-		this.userId = userId;
+		this.cId = userId;
 	}
 	public int getHouseNumber() {
 		return houseNumber;

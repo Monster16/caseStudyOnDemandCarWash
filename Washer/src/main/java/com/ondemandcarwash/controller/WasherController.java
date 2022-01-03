@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import com.ondemandcarwash.service.WasherService;
 
 @RestController
 @RequestMapping("/washer")
+@CrossOrigin(origins = "http://localhost:3000")
 public class WasherController {
 	
 	@Autowired
@@ -50,7 +52,7 @@ public class WasherController {
 		washer1.setwEmail(email);
 		washer1.setwPassword(password);
 		try {
-			washerRepository.save(washer);
+			washerService.addwasher(washer);
 			
 		} catch (Exception e) {
 			return ResponseEntity.ok(new WasherAuthResponse("Error creating washer "+ email));
@@ -85,19 +87,19 @@ public class WasherController {
 	
 	//Reading Washer by ID
 	@GetMapping("/allwashers/{id}")
-	public Optional<Washer> getWasherById(@PathVariable int id) throws ApiRequestException
+	public Optional<Washer> getWasherById(@PathVariable String id) throws ApiRequestException
 	{
-		return Optional.of(washerRepository.findById(id)
+		return Optional.of(washerService.findById(id)
 				.orElseThrow(()  -> new ApiRequestException("WASHER NOT FOUND WITH THIS ID ::") ) );
 		
 }
 	//Updating Washer Data by Id
 		@PutMapping("/update/{id}")
-		public ResponseEntity<Object> updateWasher(@PathVariable int id, @RequestBody Washer washer)
+		public ResponseEntity<Object> updateWasher(@PathVariable String id, @RequestBody Washer washer)
 		{
 			boolean isWasherExist=washerRepository.existsById(id);
 			if(isWasherExist) {
-				washerRepository.save(washer);
+				washerService.save(washer);
 				return new ResponseEntity<Object>("Washer updated successfully with id " +id, HttpStatus.OK);
 			}
 			else 
@@ -109,7 +111,7 @@ public class WasherController {
 		
 		// Deleting Washer Data by Id 
 		@DeleteMapping("/delete/{id}")
-		public ResponseEntity<Object> deleteWasher (@PathVariable int id)
+		public ResponseEntity<Object> deleteWasher (@PathVariable String id)
 		{
 			boolean isWasherExist=washerRepository.existsById(id);
 			if(isWasherExist) {

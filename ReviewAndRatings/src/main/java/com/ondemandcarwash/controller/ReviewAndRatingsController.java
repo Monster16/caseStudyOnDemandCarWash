@@ -47,7 +47,7 @@ public class ReviewAndRatingsController {
 	// Reading Review by wId
 	@GetMapping("/review/{id}")
 	public Optional<ReviewAndRatings> getReviewById(@PathVariable int id) throws ApiRequestException {
-		return Optional.of(reviewAndRatingsRepository.findById(id)
+		return Optional.of(reviewAndRatingsService.findById(id)
 				.orElseThrow(() -> new ApiRequestException("REVIEW NOT FOUND WITH THIS ID ::")));
 	}
 

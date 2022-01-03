@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +28,10 @@ import com.ondemandcarwash.service.CustomerService;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
+
 @RestController
 @RequestMapping("/customer")
+@CrossOrigin(origins="http://localhost:3000")
 public class CustomerController {
 
 	private static final String CustomerService = "Customer-Service";
@@ -65,7 +68,7 @@ public class CustomerController {
 		customer1.setcEmail(email);
 		customer1.setcPassword(password);
 		try {
-			customerRepository.save(customer);
+			customerService.addCustomer(customer);
 			
 		} catch (Exception e) {
 			return ResponseEntity.ok(new CustomerAuthResponse("Error creating customer "+ email));
@@ -101,17 +104,17 @@ public class CustomerController {
 
 	// Reading Customer by ID
 	@GetMapping("/allcustomers/{id}")
-	public Optional<Customer> getCustomerById(@PathVariable int id) throws ApiRequestException {
-		return Optional.of(customerRepository.findById(id)
+	public Optional<Customer> getCustomerById(@PathVariable String id) throws ApiRequestException {
+		return Optional.of(customerService.findById(id)
 				.orElseThrow(() -> new ApiRequestException("CUSTOMER NOT FOUND WITH THIS ID ::")));
 	}
 
 	// Updating Customer Data by Id
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Object> updateCustomer(@PathVariable int id, @RequestBody Customer customer) {
+	public ResponseEntity<Object> updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
 		boolean isCustomerExist = customerRepository.existsById(id);
 		if (isCustomerExist) {
-			customerRepository.save(customer);
+			customerService.save(customer);
 			return new ResponseEntity<Object>("user updated successfully with id " + id, HttpStatus.OK);
 		} else {
 			throw new ApiRequestException("CAN NOT UPDATE AS USER NOT FOUND WITH THIS ID ::");
@@ -121,7 +124,7 @@ public class CustomerController {
 
 	// Deleting Customer Data by Id
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Object> deleteCustomer(@PathVariable int id) {
+	public ResponseEntity<Object> deleteCustomer(@PathVariable String id) {
 		boolean isCustomerExist = customerRepository.existsById(id);
 		if (isCustomerExist) {
 			customerService.deleteById(id);
@@ -136,6 +139,18 @@ public class CustomerController {
 	 * * Below code is for the Customer for the order * Customer can AddOrder and
 	 * Delete Order
 	 */
+	
+	
+	// For getting  Order by customer id
+	
+	@GetMapping("/getallorders/{cId}") 
+	public Order getOrderById (@PathVariable("cId") String cId) 
+	{
+	  return restTemplate.getForObject("http://order-service/order/orders/" +cId , Order.class);
+	  
+	  }
+	
+	
 
 	// For Adding Order
 

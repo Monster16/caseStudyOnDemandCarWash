@@ -55,7 +55,7 @@ public class AddressController {
 	
 	// Reading Addreess by id
 	@GetMapping("/address/{id}")
-	public Optional<Address> getAddressById(@PathVariable int id) throws ApiRequestException {
+	public Optional<Address> getAddressById(@PathVariable long id) throws ApiRequestException {
 		return Optional.of(addressRepository.findById(id)
 				.orElseThrow(() -> new ApiRequestException("ADDRESS NOT FOUND WITH THIS ID ::")));
 		
@@ -63,7 +63,7 @@ public class AddressController {
 	
 	//Updating Address Data by Id
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Object> updateAddress(@PathVariable int id, @RequestBody Address address)
+	public ResponseEntity<Object> updateAddress(@PathVariable long id, @RequestBody Address address)
 	{
 		boolean isAddressExist=addressRepository.existsById(id);
 		if(isAddressExist) {

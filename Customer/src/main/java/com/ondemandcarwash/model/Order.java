@@ -8,8 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "orders")
 public class Order {
 	
-	@Id
-	private int orderId;
+	
 	private String carName;
 	private String carModel;
 	private String wName;
@@ -23,16 +22,11 @@ public class Order {
 	public Order() {
 		
 	}
-	//to string 
-	@Override
-	public String toString() {
-		return "Order [orderId=" + orderId + ", carName=" + carName + ", carModel=" + carModel + ", wName=" + wName
-				+ ", washPackId=" + washPackId + ", date=" + date + ", phoneNo=" + phoneNo + "]";
-	}
+	
 	//parameterised constructor
-	public Order(int orderId, String carName, String carModel, String wName, int washPackId, String date, long phoneNo) {
+	public Order(String carName, String carModel, String wName, int washPackId, String date, long phoneNo) {
 		super();
-		this.orderId = orderId;
+		
 		this.carName = carName;
 		this.carModel = carModel;
 		this.wName = wName;
@@ -41,12 +35,7 @@ public class Order {
 		this.phoneNo = phoneNo;
 	}
 	//getters and setters
-	public int getOrderId() {
-		return orderId;
-	}
-	public void setOrderId(int orderId) {
-		this.orderId = orderId;
-	}
+	
 	public String getCarName() {
 		return carName;
 	}

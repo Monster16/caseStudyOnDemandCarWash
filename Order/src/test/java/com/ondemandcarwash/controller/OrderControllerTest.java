@@ -55,18 +55,18 @@ class OrderControllerTest {
 	 */
 	
 
-	@Test
-	void getOrderTest() {
-		
-		order = new ArrayList<Order>();
-		order.add(new Order(1,"maruti","suzuki","anil",1,"07/12/2021",8779930443L));
-		List<Order> res = orderController.getOrder();
-		when(orderService.getOrders()).thenReturn(order);
-		assertThat(1).isEqualTo(order.size());
+//	@Test
+//	void getOrderTest() {
+//		
+//		order = new ArrayList<Order>();
+//		order.add(new Order(1,"maruti","suzuki","anil",1,"07/12/2021",8779930443L));
+//		List<Order> res = orderController.getOrder();
+//		when(orderService.getOrders()).thenReturn(order);
+//		assertThat(1).isEqualTo(order.size());
 
 		 
          
 
 }
 
-}
+
